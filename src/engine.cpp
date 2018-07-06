@@ -70,6 +70,7 @@ void Engine::randomize()
 
 void Engine::clear()
 {
+    stop();
     m_matrix = {};
     m_generation = 0;
     emit updated();
