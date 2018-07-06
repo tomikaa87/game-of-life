@@ -10,7 +10,6 @@ Q_LOGGING_CATEGORY(UniverseWidgetLog, "UniverseWidget")
 UniverseWidget::UniverseWidget(QWidget *parent)
     : QWidget(parent)
 {
-
 }
 
 void UniverseWidget::setRenderScaleFactor(const uint8_t factor)
@@ -23,8 +22,6 @@ void UniverseWidget::setCellMatrix(const IBoolMatrix &m)
 {
     QSize matrixSize{ m.columns(), m.rows() };
 
-//    qCDebug(UniverseWidgetLog) << "setCellMatrix size:" << matrixSize;
-
     if (m_image.size() != matrixSize)
     {
         m_image = QImage{ matrixSize, QImage::Format_Mono };
@@ -35,8 +32,6 @@ void UniverseWidget::setCellMatrix(const IBoolMatrix &m)
     {
         for (uint32_t x = 0; x < m.columns(); ++x)
         {
-//            qCDebug(UniverseWidgetLog) << "setting pixel" << x << ":" << y << "to" << m.valueAt(x, y);
-
             m_image.setPixel(x, y, m.valueAt(x, y) ? 0 : 1);
         }
     }
@@ -46,13 +41,11 @@ void UniverseWidget::setCellMatrix(const IBoolMatrix &m)
 
 QSize UniverseWidget::minimumSizeHint() const
 {
-    qCDebug(UniverseWidgetLog) << "minimumSizeHint():" << sizeHint();
     return sizeHint();
 }
 
 QSize UniverseWidget::sizeHint() const
 {
-    qCDebug(UniverseWidgetLog) << "sizeHint():" << m_image.size() * m_renderScaleFactor;
     return m_image.size() * m_renderScaleFactor;
 }
 
@@ -72,7 +65,6 @@ void UniverseWidget::paintEvent(QPaintEvent *event)
     imageRect.moveCenter(rect().center());
 
     m_lastImageRect = imageRect;
-    m_lastScaledImage = scaledImage;
 
     p.drawImage(imageRect, scaledImage);
 }

@@ -30,7 +30,6 @@ protected:
 
 private:
     QImage m_image;
-    QImage m_lastScaledImage;
     uint8_t m_renderScaleFactor = 4;
     QRect m_lastImageRect;
 };
